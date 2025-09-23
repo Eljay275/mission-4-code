@@ -1,0 +1,309 @@
+/* General Styles */
+body {
+  font-family: 'Roboto';
+  margin: 0;
+  padding: 0;
+  background-color: rgb(27, 33, 83);
+}
+
+/* headings use this font style  */
+h1 {
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 700;
+}
+
+/* paragraphs use this font style */
+p {
+  font-family: 'Roboto', serif; 
+  font-size: 25px; 
+  font-style: italic;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px;
+  /* add these for vertical centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.app-header {
+  color: rgb(243, 234, 234);
+  padding: 40px;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  font-family: 'Roboto';
+  font-weight: bold;
+}
+
+
+/*---------- PAGE STYLE VISIBILITY ---------- */
+.page {
+  display: none;/*all pages hidden by default*/
+  min-height: 80vh;/*each page fills full viewport height*/
+}
+
+.page.active {
+  display: block;/*shows only active page*/
+}
+
+
+/* ---------- BUTTON STYLING ---------- */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #0077cc;
+  color: white;
+  font-size: 1rem;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #005fa3;/*color change on hover*/
+}
+
+.navigation {
+  margin-top: 20px; /*add spacing above navigation*/
+  text-align: center;/*centers navigation*/
+}
+
+
+/*---------- UTILITY ---------- */
+.hidden {
+  display: none;/*class to hide any element*/
+}
+
+
+/* ---------- HOME PAGE ---------- */
+
+#page-home .home-card {
+  padding: 20px;/*inner space for card*/
+  max-width: 500px;/*limits card width*/
+  text-align: center;/*centers text inside card*/
+}
+
+#page-home .home-card img {
+  width: 100%;/*image fits card width*/
+  height: auto;/*keeps aspect ratio*/
+  border-radius: 15px;/*rounds image corners*/
+  margin-bottom: 20px; /* space below image */
+}
+
+#page-home .home-card h3 {
+  color: rgb(243, 243, 243);
+  font-size: 25px;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+
+/* ---------- SELECT ISSUE TYPE PAGE ---------- */
+
+#page-issue-type .card-container {
+  background-color: rgb(39, 44, 94);
+  border-radius: 15px;
+  padding: 85px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+#page-issue-type .card {
+  background-color: rgb(240, 239, 242);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(68, 29, 29, 0.15);
+  padding: 2%;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex: 1 1 150px; /* Responsive width */
+  max-width: 250px;
+  width: auto;
+}
+
+.card img {
+  width: 100%;
+  height: 80%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  gap:20px
+
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+
+/*  ---------- ISSUE DETAILS PAGE ----------*/
+
+#page-issue-details .issue-details-card {
+  width: 100%;
+  max-width: 1200px;
+  background-color: rgb(39, 44, 94);
+  padding:  50px 200px;
+  border-radius: 20px;
+  max-width: 6000px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+#page-issue-details textarea {
+  width: 100%; 
+  min-height: 150px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+#page-issue-details input[type="file"] {
+  width: 100%;
+}
+
+/* Drag & drop frame */
+#drop-zone {
+  width: 100%;
+  min-height: 350px;
+  border: 2px dashed #fff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background-color: rgba(82, 46, 46, 0.05);
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+#drop-zone input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+/* ---------- ADD LOCATION PAGE ---------- */
+
+#address-input {
+  width: 300px;
+  max-width: 80%;
+  padding: 12px 15px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  vertical-align: middle;
+  z-index: 1000;
+}
+#map {
+  width: 90vh;/*map width proportional to viewport height*/
+  height: 60vh; /* map height proportional to viewport height*/
+}
+
+
+/* ---------- CONTACT DETAILS PAGE ---------- */
+
+.contact-card {
+  background: rgb(39, 44, 94);
+  color: white;
+  padding: 100px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 1.3em;
+}
+
+.contact-card input[type="text"],
+.contact-card input[type="email"] {
+  width: 100%;           /* full width inside the card */
+  max-width: 400px;      /* limit maximum width */
+  padding: 12px 15px;    /* increase height */
+  font-size: 1.2rem;     /* bigger text */
+  border-radius: 8px;    /* rounded corners */
+  border: 1px solid #ccc;
+  margin: 10px 0;        /* space between fields */
+  display: block;        /* ensure each input is on its own line */
+}
+
+.contact-buttons {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+
+/* ---------- CONFIRMATION PAGE ---------- */
+
+.confirm-card p {
+  background: rgb(39, 44, 94);
+  color: white;
+  padding: 200px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 1.7em; 
+}
+
+#reference-number {
+  font-weight: bold;/* make it stand out */
+  text-decoration: underline; /* underline text*/
+  background-color: rgb(0, 0, 254); /* optional highlight */
+  padding: 2px 6px;        /* spacing around highlight */
+  border-radius: 4px;       /* slightly rounded edges for highlight */
+}
+
+
+/* ---------- ERROR MESSAGE ---------- */
+
+.error-message {
+  color: rgb(213, 138, 138);
+  font-size: 0.9rem;
+  margin-top: 5px;
+  text-align: left;
+  font-size: 0.8em;
+}
+
+/* Red border for invalid inputs */
+.input-error {
+  border: 2px solid red !important;/*strong border color*/
+    padding-right: 30px; /* space for exclamation mark */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm.25 14h-1.5v-1.5h1.5V16zm0-3h-1.5V6h1.5v7z"/></svg>'); /* exclamation icon */
+    background-repeat: no-repeat;/*prevent tiling*/
+    background-position: right 10px center;/*Places icon on right inside field*/
+    background-size: 20px 20px; /*sets icon size*/
+}
+
+.primary-btn {
+  background: rgb(0, 0, 254);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none; /* removes underline from links */
+}

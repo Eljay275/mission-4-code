@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixIt – Dashboard</title>
+
+  <!-- Linking to JavaScript and CSS -->
+  <script src="script2.js" defer></script>
+  <link rel="stylesheet" href="style2.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="images/FixIt logo.PNG" alt="FixIt-Logo">
+      </div>
+      <div class="site-title">FixIt</div>
+      <div class="search">
+        <input type="text" placeholder="Search">
+        <button><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+      </div>
+      <div class="menu"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <section class="content-section">
+      <!-- Left photo -->
+      <div class="bg-photo">
+        <img src="images/huntly.PNG" alt="Background Photo">
+      </div>
+
+      <!-- Dashboard content -->
+      <div class="main-content">
+        <div class="welcome-box">
+          <h2 id="welcomeMessage">Welcome back!</h2>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const name = localStorage.getItem("fixitUser") || "User";
+  const welcome = document.getElementById("welcomeMessage");
+  if (welcome) {
+    welcome.textContent = `Welcome back, ${name}!`;
+  }
+});
+</script>
+          <p>Here are the latest updates from your community.</p>
+        </div>
+
+        <div class="posts-grid">
+          <div class="post" id="reportBox">Your report issue post</div>
+          <div class="post">Important event post</div>
+          <div class="post">Issue resolved post</div>
+          <div class="post">Another post</div>
+        </div>
+      </div>
+
+      <!-- Right photo -->
+      <div class="bg-photo">
+        <img src="images/huntly.PNG" alt="Background Photo">
+      </div>
+    </section>
+  </main>
+
+<!-- Report Modal -->
+<div id="reportModal" class="modal">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Report Details</h2>
+      <div id="modalBody">
+    </div>
+  </div>
+</div>
+</body>
+</html>
