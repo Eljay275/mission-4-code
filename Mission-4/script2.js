@@ -3,14 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const name = localStorage.getItem("fixitUser") || "User";
   const welcome = document.getElementById("welcomeMessage");
   if (welcome) welcome.textContent = `Welcome back, ${name}!`;
+  // this just makes the welcome message say hi to whoever's logged in. It grabs the name we saved in the localstorage
+  // then swaps out the text in the welcome message
 
   // Report box + saved report
   const reportBox = document.getElementById("reportBox");
   const report = safeParse(localStorage.getItem("fixitReport"));
 
   if (report && reportBox) {
-    // ✅ Updated text
-    reportBox.textContent = `Your recent post`;
+
+    reportBox.textContent = `Your recent post`; 
+    // This is where i stuffed up because before i havd it as reportBox.textContent = `Reported: ${report.type} (click to view)`;
+    // which was making two pop up massages pop up (an actual alert message and my set modal one that i made) but i fixed it lol
 
     // Modal bits
     const modal     = document.getElementById("reportModal");
@@ -41,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+  // this whole chunk is just modal stuff. It grabs the modal, the body and the close btn.
+  // openModal shows the popup with the report details in it, close modal hihs the popup
 
 // Build the HTML that goes inside the modal
 function buildReportHTML(r) {
@@ -62,8 +68,11 @@ function buildReportHTML(r) {
   }
   return html;
 }
+// buildreporthtml makes the actual content for the modal (the txt and img)
 
 // Safe JSON.parse
 function safeParse(s) {
   try { return JSON.parse(s); } catch { return null; }
 }
+// this makes it so it don't crsh the website
+// so if the storage is empty it comes up as null

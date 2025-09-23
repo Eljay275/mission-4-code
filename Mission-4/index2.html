@@ -9,12 +9,12 @@
   <script src="script2.js" defer></script>
   <link rel="stylesheet" href="style2.css">
 
-  <!-- Font Awesome -->
+  <!-- Font Awesome (this gives us all the cool icons) -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header at the top of the site -->
   <header>
     <div class="navbar">
       <div class="logo">
@@ -29,31 +29,37 @@
     </div>
   </header>
 
-  <!-- Main -->
+  <!-- Main content area -->
   <main>
     <section class="content-section">
-      <!-- Left photo -->
+      <!-- Left side photo (decoration/background) -->
       <div class="bg-photo">
         <img src="images/huntly.PNG" alt="Background Photo">
       </div>
 
-      <!-- Dashboard content -->
+      <!-- Dashboard content (middle part) -->
       <div class="main-content">
         <div class="welcome-box">
           <h2 id="welcomeMessage">Welcome back!</h2>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const name = localStorage.getItem("fixitUser") || "User";
-  const welcome = document.getElementById("welcomeMessage");
+  const name = localStorage.getItem("fixitUser") || "User"; 
+  // ^ grab saved name from localStorage, or just say "User" if none saved
+  
+  const welcome = document.getElementById("welcomeMessage"); 
+  // ^ find the <h2> with id="welcomeMessage"
+  
   if (welcome) {
-    welcome.textContent = `Welcome back, ${name}!`;
+    welcome.textContent = `Welcome back, ${name}!`; 
+    // ^ actually change the text to say Welcome back + their name
   }
 });
 </script>
           <p>Here are the latest updates from your community.</p>
         </div>
 
+        <!-- these aren't real posts, there just there for show, they don't actually go anywhere -->
         <div class="posts-grid">
           <div class="post" id="reportBox">Your report issue post</div>
           <div class="post">Important event post</div>
@@ -62,20 +68,21 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
 
-      <!-- Right photo -->
+      <!-- Right side photo -->
       <div class="bg-photo">
         <img src="images/huntly.PNG" alt="Background Photo">
       </div>
     </section>
   </main>
 
-<!-- Report Modal -->
+<!-- Modal that pops up when you click the report -->
 <div id="reportModal" class="modal">
   <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close">&times;</span> 
       <h2>Report Details</h2>
       <div id="modalBody">
-    </div>
+        <!-- this is where the JS will dump the report info -->
+      </div>
   </div>
 </div>
 </body>

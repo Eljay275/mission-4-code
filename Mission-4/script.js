@@ -8,6 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 });
+// this part checks if the URL says ?showSignup=1. if yes it shows the modal when the page loads
 
 // Close button
 document.querySelector(".close").addEventListener("click", () => {
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (name === 'login')  loginView.classList.remove('hidden');
     else                        defaultView.classList.remove('hidden');
   };
+  // this part is the if else for a default user, new user (signup) and old user (login)
 
   const params = new URLSearchParams(location.search);
   if (params.get('showSignup') === '1') {
@@ -49,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const openLoginBtn  = modal.querySelector('.open-login');
   if (openSignupBtn) openSignupBtn.addEventListener('click', () => showView('signup'));
   if (openLoginBtn)  openLoginBtn.addEventListener('click',  () => showView('login'));
+  // these are the btns that the user clicks (sign up btn and login btn)
 
   modal.querySelectorAll('.back-default').forEach(btn => {
     btn.addEventListener('click', () => showView('default'));
@@ -88,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       msg.textContent = message;
       input.insertAdjacentElement('afterend', msg);
     };
+    // red error message that pops up under the input if incorrect
 
     const clearError = (input) => {
       input.classList.remove('error', 'success');
@@ -96,11 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
         input.nextElementSibling.remove();
       }
     };
+    // clears the error message if the user fixes input
 
     const markSuccess = (input) => {
       clearError(input);
       input.classList.add('success');
     };
+    // marks input green when it's alg
 
     // Live feedback
     form.querySelectorAll('input').forEach((input) => {
@@ -124,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+    // checks live feedback as the user types the email format and password length
 
     // On submit
     form.addEventListener('submit', (e) => {
@@ -159,17 +166,16 @@ document.addEventListener('DOMContentLoaded', () => {
           markSuccess(input);
         }
       });
+      // double checks all required fields again before allowing submit
 
       if (valid) {
-        // Try to save a display name for the dashboard
+        // saves name for dashboard welcome
         let displayName = "";
 
-        // If it's the signup form, prefer the username field
         const nameInput = form.querySelector('input[name="username"]');
         if (nameInput && nameInput.value.trim()) {
           displayName = nameInput.value.trim();
         } else {
-          // Otherwise infer a name from the email in the login form
           const emailInput = form.querySelector('input[name="email"]');
           if (emailInput && emailInput.value.includes("@")) {
             displayName = emailInput.value.split("@")[0];
@@ -180,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem("fixitUser", displayName);
         }
 
-        // IMPORTANT: change this if your logged-in page has a different name
         window.location.assign("index2.html");
       }
     });

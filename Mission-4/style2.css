@@ -52,7 +52,7 @@ body {
 .content-section {
   display: flex;
   align-items: stretch;
-  min-height: 100vh; /* fill the full viewport height */
+  min-height: 100vh; 
 }
 
 .bg-photo {
@@ -62,7 +62,7 @@ body {
 .bg-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* keeps aspect ratio but fills space */
+  object-fit: cover; 
 }
 
 
@@ -87,10 +87,10 @@ body {
 
 .posts-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;  /* 2 columns */
-  grid-auto-rows: 1fr;            /* equal row height */
+  grid-template-columns: 1fr 1fr;  
+  grid-auto-rows: 1fr;
   gap: 20px;
-  flex: 1;                        /* allow grid to stretch inside .main-content */
+  flex: 1;
 }
 
 .post {
@@ -102,7 +102,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* smooth effect */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .post:hover {
@@ -110,10 +110,11 @@ body {
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
   cursor: pointer;
 }
+/* makes the posts pop up a bit when hovered */
 
 /* Modal background */
 .modal {
-  display: none; /* hidden by default */
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0; top: 0;
@@ -193,7 +194,7 @@ body {
 
 /* ---------- Report Modal ---------- */
 .modal {
-  display: none; /* hidden by default */
+  display: none; 
   position: fixed;
   z-index: 1000;
   left: 0; top: 0;

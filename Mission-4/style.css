@@ -9,6 +9,8 @@ body {
     font-family: Tahoma, sans-serif;
     line-height: 1.5; 
 }
+/* removes weird browser defaults so my style actually looks consistent on all browser types */
+
 /* Navbar */ 
 .navbar { 
     display: flex; 
@@ -50,11 +52,13 @@ body {
     margin-left: 15px; 
 }
 
+/* This makes all the navbar setup line up (lie the logo, title, search and menu) */
+
 /* Content area */
 .content-section {
   display: flex;
   align-items: stretch;
-  min-height: 100vh; /* fill the full viewport height */
+  min-height: 100vh;
 }
 
 .bg-photo {
@@ -64,46 +68,48 @@ body {
 .bg-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* keeps aspect ratio but fills space */
+  object-fit: cover;
 }
 
 .bg-photo img {
-  width: 100%;            /* take full width */
-  height: 100%;           /* match height of .main-content */
-  object-fit: cover;      /* crop to fill without distortion */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .main-content {
   flex: 2;
-  max-width: 1200px; /* keeps text readable on huge displays */
+  max-width: 1200px;
   margin: 0 auto;
   background: white;
-  padding: 40px 20px;   /* extra top padding gives breathing space */
-  text-align: left;     /* align text left */
+  padding: 40px 20px;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;  /* content starts at top */
+  justify-content: flex-start;
 }
 
 .main-content p {
-  font-weight: 500;   /* medium bold, not too heavy */
-  font-size: 1.05rem; /* optional: bump font size slightly */
-  margin-bottom: 20px; /* spacing before the button */
+  font-weight: 500;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
 }
+/* this splits the screen into 3 parts, two sides with the bg photos and the middle the main content */
 
 .primary-btn {
   background: rgb(57, 10, 86);
   color: white;
   border: none;
-  padding: 12px 30px;   /* makes it look like a real button */
-  margin: 20px auto;    /* centers it horizontally */
+  padding: 12px 30px;
+  margin: 20px auto;
   cursor: pointer;
   font-weight: bold;
   font-size: 16px;
   display: inline-block;
-  border-radius: 4px;   /* optional: rounded corners */
-  text-decoration: none;   /* removes underline */
+  border-radius: 4px;
+  text-decoration: none;
 }
+/* the pretty button that takes the user to Sita's cool page */
 
 /* Icon grid */
 .icon-grid {
@@ -115,35 +121,26 @@ body {
 }
 
 .icon {
-  /* controls tile height; tweak to taste */
   min-height: 180px;
-
-  /* centre content */
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: #eee;
   border-radius: 8px;
-
-  /* one place to control icon glyph size (responsive) */
   --icon-size: clamp(56px, 8vw, 120px);
-
   position: relative;
-  flex-direction: column; /* stack icon + label */
+  flex-direction: column;
 }
 
-/* Font Awesome glyphs */
 .icon i {
   font-size: var(--icon-size);
   line-height: 1;
 }
 
-/* Your image glyph */
 .icon img {
   width: var(--icon-size);
   height: var(--icon-size);
-  object-fit: contain;  /* keeps proportions, no squish */
+  object-fit: contain; 
   display: block;
 }
 
@@ -176,6 +173,7 @@ body {
 .icon:hover .icon-label {
   opacity: 1;
 }
+/* my sexy icons with cool hovers and labels */
 
 /* Modal styles */
 .modal {
@@ -204,6 +202,7 @@ body {
   background: none;
   border: 0;
 }
+/* the beautiful modal style that pops up on top of the main content for the sign up/login options */
 
 .view.hidden { 
   display: none; 
@@ -269,6 +268,7 @@ body {
   background-position: right 10px center;
   background-size: 18px;
 }
+/* shows red borders if error, green tick if success */
 
 .link { 
   background: none; 
@@ -295,3 +295,4 @@ body {
     padding: 1rem;
   }
 }
+/* mobile friendly? */
