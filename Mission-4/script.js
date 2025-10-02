@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       defaultView.classList.remove("hidden");
     }
 
-    modal.style.display = "flex"; // always open modal
+    modal.style.display = "flex";
   };
 
   document.querySelectorAll(".open-signup").forEach(btn =>

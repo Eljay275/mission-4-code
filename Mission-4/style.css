@@ -75,9 +75,11 @@ body {
   color: #fff;
   outline: none;
 }
+
 .search input::placeholder {
   color: rgba(255, 255, 255, 0.8);
 }
+
 .search button {
   font-size: 18px;
   padding: 8px;
@@ -88,21 +90,22 @@ body {
   color: #fff;
 }
 
-/* ✅ Navbar-only overrides for the auth buttons */
 .navbar > .signup-btn,
 .navbar > .login-btn {
-  margin: 0 !important;         /* kill the auto-centering margins */
+  margin: 0 !important;         
   display: inline-flex;
   align-items: center;
 }
+
 .navbar > .login-btn {
-  margin-left: 14px !important; /* add space between Sign up → Log in */
-}
-.navbar > .menu {
-  margin-left: 14px;            /* space before the hamburger */
+  margin-left: 14px !important; 
 }
 
-/* Content layout */
+.navbar > .menu {
+  margin-left: 14px;
+}
+
+/* Content */
 .content-section {
   display: flex;
   align-items: stretch;
@@ -119,7 +122,6 @@ body {
   filter: brightness(0.8) contrast(1.05) saturate(1.1);
 }
 
-/* ===== Glass cards (your requested block) ===== */
 .main-content,
 .welcome-box,
 .post,
@@ -147,13 +149,13 @@ body {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .main-content p {
   font-weight: 500;
   font-size: 1.05rem;
   margin-bottom: 16px;
 }
 
-/* CTA button */
 .primary-btn,
 .signup-btn,
 .login-btn {
@@ -171,6 +173,7 @@ body {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
+
 .primary-btn:hover,
 .signup-btn:hover,
 .login-btn:hover {
@@ -186,6 +189,7 @@ body {
   margin-top: 22px;
   flex-grow: 1;
 }
+
 .icon {
   min-height: 180px;
   display: flex;
@@ -198,29 +202,35 @@ body {
   flex-direction: column;
   transition: background 0.3s ease, transform 0.3s ease;
 }
+
 .icon i {
   font-size: var(--icon-size);
   line-height: 1;
   color: #3a0ca3;
 }
+
 .icon img {
   width: var(--icon-size);
   height: var(--icon-size);
   object-fit: contain;
   display: block;
 }
+
 .icon:hover {
   background: rgba(255, 255, 255, 0.95);
   transform: translateY(-4px);
 }
+
 .icon i,
 .icon img {
   transition: transform 0.3s ease;
 }
+
 .icon:hover i,
 .icon:hover img {
   transform: scale(1.15) rotate(5deg);
 }
+
 .icon-label {
   margin-top: 10px;
   font-size: 18px;
@@ -240,12 +250,14 @@ body {
   align-items: center;
   padding: 16px;
 }
+
 .modal-content {
   width: 90%;
   max-width: 520px;
   padding: 24px;
   position: relative;
 }
+
 .close {
   position: absolute;
   top: 10px;
@@ -255,25 +267,30 @@ body {
   background: none;
   border: 0;
 }
+
 .view.hidden {
   display: none;
 }
+
 .modal-content form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .modal-content input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
 }
+
 .modal-buttons {
   display: flex;
   gap: 12px;
   justify-content: center;
   margin-top: 12px;
 }
+
 .link {
   background: none;
   border: 0;
@@ -286,12 +303,14 @@ body {
 .modal-content input.error {
   border: 2px solid #d32f2f;
 }
+
 .error-message {
   color: #d32f2f;
   font-size: 0.9rem;
   margin-top: -4px;
   margin-bottom: 10px;
 }
+
 .modal-content input.success {
   border: 2px solid #388e3c;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" viewBox="0 0 16 16"><path d="M13.485 1.929a.75.75 0 0 1 0 1.06l-7.25 7.25-3.25-3.25a.75.75 0 1 1 1.06-1.06l2.19 2.19 6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>');
