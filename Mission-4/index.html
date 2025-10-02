@@ -1,111 +1,108 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-    <head> 
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-          <!-- Linking to the JavaScript and CSS files -->
-        <script src="script.js" defer></script>
-        <link rel="stylesheet" href="style.css"> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-          <!-- Link to fonts and font awesome -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
-        <title>Fix it</title> 
-    </head> 
-    
-    <!-- Header --> 
-     <header> 
-        <div class="navbar"> 
-            <div class="logo"> 
-                <img src="images/FixIt logo.PNG" alt="FixIt-Logo"> 
-            </div> 
-            <div class="site-title">FixIt</div> 
-            <div class="search"> 
-                <input type="text" placeholder="Search"> 
-                <button><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button> 
-            </div> 
-            <div class="menu"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></div> 
-        </div> 
+    <title>FixIt</title>
+
+    <!-- Fonts + Icons -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- App CSS/JS -->
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+    <!-- Header -->
+    <body>
+    <header>
+      <div class="navbar">
+        <div class="logo"><img src="images/FixIt logo.PNG" alt="FixIt-Logo" /></div>
+        <div class="site-title">FixIt</div>
+        <div class="search">
+          <input type="text" placeholder="Search" aria-label="Search" />
+          <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <button class="signup-btn open-signup">Sign up</button>
+        <button class="login-btn open-login">Log in</button>
+        <div class="menu" aria-label="Menu"><i class="fa-solid fa-bars"></i></div>
+      </div>
     </header>
 
-  <!-- Main -->
-  <main>
+    <!-- Main -->
+    <main>
+      <section class="content-section">
+        <div class="bg-photo">
+          <img src="images/huntly.PNG" alt="Background Photo" />
+        </div>
 
-    <!-- Content -->
-    <section class="content-section">
-      <div class="bg-photo">
-        <img src="images/huntly.PNG" alt="Background Photo">
-      </div>
+        <div class="main-content">
+          <p>
+            Welcome to FixIt Council — your online hub for local services and community support. Here, you can quickly report issues such as graffiti, potholes, or broken streetlights, and share feedback directly with the council. You will also find rubbish and recycling collection dates, sticker prices, upcoming events, and useful information on animal services, vet care, health resources, road updates, and community safety. Want to report a problem? Just click the button below, fill out the form, and help us keep our community safe and thriving together!
+          </p>
 
-<div class="main-content">
-  <p>
-    Welcome to FixIt Council — your online hub for local services and community support. Here, you can quickly report issues such as graffiti, potholes, or broken streetlights, and share feedback directly with the council. You will also find rubbish and recycling collection dates, sticker prices, upcoming events, and useful information on animal services, vet care, health resources, road updates, and community safety. Want to report a problem? Just click the button below, fill out the form, and help us keep our community safe and thriving together!
-  </p>
-  <a href="Mission4.html" class="primary-btn">Do it online</a>
-  <!-- this is the btn that will take the user to the reporting page made by sita 😋 -->
+          <a href="Mission4.html" class="primary-btn">Do it online</a>
 
-  <!-- Icon grid -->
-  <div class="icon-grid">
-    <div class="icon"><i class="fa-solid fa-recycle" style="color: rgb(57, 10, 86);"></i><span class="icon-label">Recycling</span></div>
-    <div class="icon"><i class="fa-solid fa-paw" style="color: rgb(57, 10, 86);"></i><span class="icon-label">Pets</span></div>
-    <div class="icon"><i class="fa-solid fa-road" style="color: rgb(57, 10, 86);"></i><span class="icon-label">Roads</span></div>
-    <div class="icon"><img src="images/apartment-logo.png" alt=""><span class="icon-label">Housing</span></div>
-    <div class="icon"><i class="fa-solid fa-heart" style="color: rgb(57, 10, 86);"></i><span class="icon-label">Health</span></div>
-    <div class="icon"><i class="fa-solid fa-calendar-days" style="color: rgb(57, 10, 86);"></i><span class="icon-label">Events</span></div>
-    <!-- this does nothing yet lol, just there for show -->
-  </div>
-</div>
+          <!-- Icon grid -->
+          <div class="icon-grid">
+            <div class="icon"><i class="fa-solid fa-recycle"></i><span class="icon-label">Recycling</span></div>
+            <div class="icon"><i class="fa-solid fa-paw"></i><span class="icon-label">Pets</span></div>
+            <div class="icon"><i class="fa-solid fa-road"></i><span class="icon-label">Roads</span></div>
+            <div class="icon"><img src="images/apartment-logo.png" alt=""><span class="icon-label">Housing</span></div>
+            <div class="icon"><i class="fa-solid fa-heart"></i><span class="icon-label">Health</span></div>
+            <div class="icon"><i class="fa-solid fa-calendar-days"></i><span class="icon-label">Events</span></div>
+          </div>
+        </div>
 
-      <div class="bg-photo">
-        <img src="images/huntly.PNG" alt="Background Photo">
-      </div>
-    </section>
-  </main>
+        <div class="bg-photo">
+          <img src="images/huntly.PNG" alt="Background Photo" />
+        </div>
+      </section>
+    </main>
 
-<!-- Signup / Login modal -->
-<div id="signupModal" class="modal" aria-hidden="true">
-  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button type="button" class="close" aria-label="Close">×</button>
+    <!-- Signup / Login modal -->
+    <div id="signupModal" class="modal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button type="button" class="close" aria-label="Close">×</button>
 
-    <div id="view-default" class="view">
-      <h2 id="modalTitle">
-        If you want to be updated on your report or others in your community, please Sign up or Log in
-      </h2>
-      <div class="modal-buttons">
-        <button type="button" class="signup-btn open-signup">Sign up</button>
-        <button type="button" class="login-btn open-login">Log in</button>
+        <div id="view-default" class="view">
+          <h2 id="modalTitle">
+            If you want to be updated on your report or others in your community, please Sign up or Log in
+          </h2>
+          <div class="modal-buttons">
+            <button type="button" class="signup-btn open-signup">Sign up</button>
+            <button type="button" class="login-btn open-login">Log in</button>
+          </div>
+        </div>
+
+        <!-- SIGN UP -->
+        <div id="view-signup" class="view hidden">
+          <h2>Sign up</h2>
+          <form id="signupForm" novalidate>
+            <input type="text" placeholder="Username" name="username" required />
+            <input type="email" placeholder="Email" name="email" required />
+            <input type="tel" placeholder="Phone number" name="phone" />
+            <input type="password" placeholder="Password" name="password" required minlength="6" />
+            <button type="submit" class="signup-btn">Sign up</button>
+          </form>
+          <p><button type="button" class="link back-default">Back</button></p>
+        </div>
+
+        <!-- LOG IN -->
+        <div id="view-login" class="view hidden">
+          <h2>Log in</h2>
+          <form id="loginForm" novalidate>
+            <input type="email" placeholder="Email" name="email" required />
+            <input type="password" placeholder="Password" name="password" required />
+            <label><input type="checkbox" /> Remember me</label>
+            <button type="submit" class="login-btn">Log in</button>
+          </form>
+          <p><a href="#">Forgot password?</a></p>
+          <p><button type="button" class="link back-default">Back</button></p>
+        </div>
       </div>
     </div>
-    <!-- this is a pop up messager to ask the user to sign up or log in -->
-
-    <!-- SIGN UP CONTENT -->
-<div id="view-signup" class="view hidden">
-  <h2>Sign up</h2>
-  <form id="signupForm" novalidate>
-    <input type="text" placeholder="Username" name="username" required>
-    <input type="email" placeholder="Email"   name="email"    required>
-    <input type="tel"  placeholder="Phone number" name="phone">
-    <input type="password" placeholder="Password" name="password" required minlength="6">
-    <button type="submit" class="signup-btn">Sign up</button>
-  </form>
-  <p><button type="button" class="link back-default">Back</button></p>
-  <!-- this is the form that shows up when a user clicks to sign up -->
-</div>
-
-<!-- LOG IN CONTENT -->
-<div id="view-login" class="view hidden">
-  <h2>Log in</h2>
-  <form id="loginForm" novalidate>
-    <input type="email"    placeholder="Email"    name="email"    required>
-    <input type="password" placeholder="Password" name="password" required>
-    <label><input type="checkbox"> Remember me</label>
-    <button type="submit" class="login-btn">Log in</button>
-  </form>
-  <p><a href="#">Forgot password?</a></p>
-  <p><button type="button" class="link back-default">Back</button></p>
-  <!-- this is the form that shows up when a user clicks to log in -->
-</div>
-</div>
-</div>
-</body>
+  </body>
 </html>

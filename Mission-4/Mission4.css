@@ -1,170 +1,224 @@
-/* General Styles */
+/* ---------- GENERAL STYLES ---------- */
+/* Set default styles for body and html */
 body {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: rgb(27, 33, 83);
+  background-color: rgb(252, 250, 253);
+  overflow: hidden; /* no scrollbars */
+  height: 100vh; /* full viewport height*/
 }
 
-/* headings use this font style  */
+
+/* ---------- NAVBAR ---------- */
+/* Sticky top navigation bar with logo and app name */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgb(39, 7, 60);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 50px 40x;/*ensure the navbar stays above other content*/
+  z-index: 1000;
+}
+
+/* Navbar text/logo container */
+.navLogo {
+  font-family: 'Crimson Text', sans-serif;
+  font-style: italic;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* nav image/logo */
+.nav-logo {
+  height: 70px;
+  width: auto;
+}
+
+
+/* ---------- HEADINGS ---------- */
+/* Global heading styles */
 h1 {
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
 }
 
-/* paragraphs use this font style */
 p {
-  font-family: 'Roboto', serif; 
-  font-size: 25px; 
+  font-family: 'Crimson Text', serif;
+  font-size: 1.9rem;
   font-style: italic;
 }
 
-.app-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 50px;
-  /* add these for vertical centering */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-}
 
+/* ---------- APP HEADER & CONTENT ---------- */
+/* Main page headers styling */
 .app-header {
-  color: rgb(243, 234, 234);
-  padding: 40px;
+  margin-top: 40px; /* move header down */
+  margin-bottom: 20px;
   text-align: center;
   font-size: 3rem;
-  margin-bottom: 10px;
-  font-family: 'Roboto';
   font-weight: bold;
+  color: whitesmoke;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+/* container for all app pages */
+.app-container {
+  flex: 1; /* take remaining vertical space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* center content vertically */
+  align-items: center;
+  width: 100%;
+  padding: 0 20px; /* optional side padding */
+  box-sizing: border-box;
 }
 
 
-/*---------- PAGE STYLE VISIBILITY ---------- */
+/* ---------- PAGE VISIBILITY ---------- */
+/* Default hidden pages */
 .page {
-  display: none;/*all pages hidden by default*/
-  min-height: 80vh;/*each page fills full viewport height*/
+  display: none;
+  width: 100vw;
+  height: 100vh; /* fit viewport exactly */
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Overlay for each page */
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(55, 5, 253, 0.247);/*transparent overlay*/
+  z-index: -1; /*behind page content*/
+}
+
+/* Active page displayed */
 .page.active {
-  display: block;/*shows only active page*/
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* aligns items at top */
+  align-items: center;
+}
+
+/* Page specific navigation spacing */
+.page-issue-type .navigation {
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
 }
 
 
-/* ---------- BUTTON STYLING ---------- */
+/* ---------- BUTTONS ---------- */
+/* Global button styling */
 button {
-  padding: 10px 15px;
+  padding: 15px 35px;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
   cursor: pointer;
-  background-color: #0077cc;
+  background-color: blue;
   color: white;
-  font-size: 1rem;
-  margin: 5px;
+  font-size: 1.3rem;
+  margin: 10px;
 }
 
+/* Button hover effect */
 button:hover {
-  background-color: #005fa3;/*color change on hover*/
-}
-
-.navigation {
-  margin-top: 20px; /*add spacing above navigation*/
-  text-align: center;/*centers navigation*/
-}
-
-
-/*---------- UTILITY ---------- */
-.hidden {
-  display: none;/*class to hide any element*/
+  background-color: #5d9ecd;
 }
 
 
 /* ---------- HOME PAGE ---------- */
-
 #page-home .home-card {
-  padding: 20px;/*inner space for card*/
-  max-width: 500px;/*limits card width*/
-  text-align: center;/*centers text inside card*/
+  padding: 20px 70px;
+  max-width: 520px;
+  text-align: center;
+  background-color: rgb(138, 122, 210);
 }
 
 #page-home .home-card img {
-  width: 100%;/*image fits card width*/
-  height: auto;/*keeps aspect ratio*/
-  border-radius: 15px;/*rounds image corners*/
-  margin-bottom: 20px; /* space below image */
+  width: 90%;
+  height: auto;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px black;
 }
 
 #page-home .home-card h3 {
-  color: rgb(243, 243, 243);
+  color: rgb(248, 246, 246);
   font-size: 25px;
   font-style: italic;
   margin-bottom: 20px;
 }
 
-
-/* ---------- SELECT ISSUE TYPE PAGE ---------- */
-
+/* ---------- SELECT ISSUE TYPE ---------- */
+/* Container for all issue cards */
 #page-issue-type .card-container {
-  background-color: rgb(39, 44, 94);
+  background-color: rgb(138,122,210);
+  color: rgb(19, 19, 19);
   border-radius: 15px;
-  padding: 85px;
+  padding: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  margin: 50px 0;
+  margin: 20px 0;
 }
 
+/* Individual issue cards */
 #page-issue-type .card {
-  background-color: rgb(240, 239, 242);
+  background-color: white;
   border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(68, 29, 29, 0.15);
+  box-shadow: 0 4px 6px black;
   padding: 2%;
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  flex: 1 1 150px; /* Responsive width */
+  flex: 1 1 150px;
   max-width: 250px;
   width: auto;
 }
 
+/* Issue card images */
 .card img {
   width: 100%;
   height: 80%;
   border-radius: 10px;
   margin-bottom: 10px;
-  gap:20px
-
 }
 
+/* Hover effect for cards */
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 12px rgba(0,0,0,0.2);
 }
 
 
-/*  ---------- ISSUE DETAILS PAGE ----------*/
-
+/* ---------- ISSUE DETAILS ---------- */
+/* Container for issue description form */
 #page-issue-details .issue-details-card {
-  width: 100%;
-  max-width: 1200px;
-  background-color: rgb(39, 44, 94);
-  padding:  50px 200px;
-  border-radius: 20px;
-  max-width: 6000px;
-  margin: 40px auto;
+  border-radius: 15px;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+  background-color: rgb(138, 122, 210);
 }
 
+/* Textarea for issue description */
 #page-issue-details textarea {
-  width: 100%; 
+  width: 100%;
   min-height: 150px;
   padding: 15px;
   border-radius: 10px;
@@ -173,11 +227,12 @@ button:hover {
   resize: vertical;
 }
 
+/* File input styling */
 #page-issue-details input[type="file"] {
   width: 100%;
 }
 
-/* Drag & drop frame */
+/*----- Drag & drop area styling ------ */
 #drop-zone {
   width: 100%;
   min-height: 350px;
@@ -194,17 +249,28 @@ button:hover {
   overflow: hidden;
 }
 
+/* make file input cover entire drop zone */
 #drop-zone input[type="file"] {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
   cursor: pointer;
 }
 
+/* Preview image inside drop zone */
+#drop-zone img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
 
-/* ---------- ADD LOCATION PAGE ---------- */
 
+/* ---------- ADD LOCATION ---------- */
+/* Address input field styling */
 #address-input {
   width: 300px;
   max-width: 80%;
@@ -213,19 +279,19 @@ button:hover {
   border-radius: 8px;
   border: 1px solid #ccc;
   margin-bottom: 12px;
-  vertical-align: middle;
-  z-index: 1000;
 }
+
+/* Map container styling */
 #map {
-  width: 90vh;/*map width proportional to viewport height*/
-  height: 60vh; /* map height proportional to viewport height*/
+  width: 90vh;
+  height: 60vh;
 }
 
 
-/* ---------- CONTACT DETAILS PAGE ---------- */
-
+/* ---------- CONTACT DETAILS ---------- */
+/* Contact form card */
 .contact-card {
-  background: rgb(39, 44, 94);
+  background: rgb(138, 122, 210);
   color: white;
   padding: 100px;
   border-radius: 12px;
@@ -235,18 +301,20 @@ button:hover {
   font-size: 1.3em;
 }
 
+/* Input fields for contact card */
 .contact-card input[type="text"],
 .contact-card input[type="email"] {
-  width: 100%;           /* full width inside the card */
-  max-width: 400px;      /* limit maximum width */
-  padding: 12px 15px;    /* increase height */
-  font-size: 1.2rem;     /* bigger text */
-  border-radius: 8px;    /* rounded corners */
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 15px;
+  font-size: 1.2rem;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  margin: 10px 0;        /* space between fields */
-  display: block;        /* ensure each input is on its own line */
+  margin: 10px 0;
+  display: block;
 }
 
+/* Container for contact buttons */
 .contact-buttons {
   margin: 15px 0;
   display: flex;
@@ -256,54 +324,43 @@ button:hover {
 
 
 /* ---------- CONFIRMATION PAGE ---------- */
-
+/* Confirmation card styling */
 .confirm-card p {
-  background: rgb(39, 44, 94);
+  background: rgb(138, 122, 210);
   color: white;
-  padding: 200px;
+  padding: 80px;
   border-radius: 12px;
   text-align: center;
   max-width: 500px;
-  margin: 0 auto;
-  font-size: 1.7em; 
+  margin: 0 100px;
+  font-size: 1.7em;
 }
 
+/* Highlight reference number */
 #reference-number {
-  font-weight: bold;/* make it stand out */
-  text-decoration: underline; /* underline text*/
-  background-color: rgb(0, 0, 254); /* optional highlight */
-  padding: 2px 6px;        /* spacing around highlight */
-  border-radius: 4px;       /* slightly rounded edges for highlight */
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: rgb(79, 12, 173);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 
 /* ---------- ERROR MESSAGE ---------- */
-
+/* Error message styling */
 .error-message {
-  color: rgb(213, 138, 138);
-  font-size: 0.9rem;
+  color: rgb(213, 4, 4);
+  font-size: 0.8em;
   margin-top: 5px;
   text-align: left;
-  font-size: 0.8em;
 }
 
-/* Red border for invalid inputs */
+/* Input field with error styling */
 .input-error {
-  border: 2px solid red !important;/*strong border color*/
-    padding-right: 30px; /* space for exclamation mark */
-    background-image: url('data:image/svg+xml;utf8,<svg fill="red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm.25 14h-1.5v-1.5h1.5V16zm0-3h-1.5V6h1.5v7z"/></svg>'); /* exclamation icon */
-    background-repeat: no-repeat;/*prevent tiling*/
-    background-position: right 10px center;/*Places icon on right inside field*/
-    background-size: 20px 20px; /*sets icon size*/
-}
-
-.primary-btn {
-  background: rgb(0, 0, 254);
-  color: #fff;
-  border: 0;
-  border-radius: 6px;
-  padding: 10px 18px;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none; /* removes underline from links */
+  border: 2px solid red !important;
+  padding-right: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm.25 14h-1.5v-1.5h1.5V16zm0-3h-1.5V6h1.5v7z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px 20px;
 }

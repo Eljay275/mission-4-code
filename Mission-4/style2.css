@@ -4,243 +4,240 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Background + typography (same as home) */
 body {
-  font-family: Tahoma, sans-serif;
+  background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
+  background-size: 300% 300%;
+  animation: gradientMove 12s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
   line-height: 1.5;
+  opacity: 0;
+  animation-name: gradientMove, pageFade;
+  animation-duration: 12s, .7s;
+  animation-timing-function: ease, ease;
+  animation-iteration-count: infinite, 1;
+  animation-fill-mode: both;
 }
 
-/* Navbar (matches homepage) */
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pageFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Navbar */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgb(57, 10, 86);
-  color: white;
-  padding: 20px 20px;
+  background: rgba(20, 0, 35, 0.65);
+  color: #fff;
+  padding: 14px 20px;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
+
 .logo {
   display: flex;
-  padding: 10px;
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
+  overflow: hidden;
 }
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .site-title {
-  font-weight: bold;
+  font-weight: 700;
   margin-left: 10px;
   flex-grow: 1;
-  font-size: 40px;
+  font-size: 28px;
+  letter-spacing: 0.5px;
 }
+
 .search input {
-  padding: 5px;
+  padding: 8px 10px;
   font-size: 15px;
-  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  outline: none;
 }
+
+.search input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .search button {
-  font-size: 20px;
-  padding: 5px;
+  font-size: 18px;
+  padding: 8px;
+  margin-left: 6px;
   border: none;
   background: transparent;
   cursor: pointer;
+  color: #fff;
 }
+
 .menu {
   font-size: 22px;
   cursor: pointer;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
+/* Layout */
 .content-section {
   display: flex;
   align-items: stretch;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 .bg-photo {
   flex: 1;
   display: flex;
 }
+
 .bg-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
+  filter: brightness(0.8) contrast(1.05) saturate(1.1);
 }
 
+/* ===== Glass cards (requested block) ===== */
+.main-content,
+.welcome-box,
+.post,
+.modal-content {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
 
-/* middle content */
+.main-content:hover,
+.post:hover {
+  transform: translateY(-6px);
+}
+
 .main-content {
   flex: 2;
-  background: white;
-  padding: 40px 20px;
+  padding: 36px 22px;
+  margin: 32px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
-/* Welcome box */
 .welcome-box {
-  background: #eee;
   padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 6px;
+  margin-bottom: 24px;
   text-align: center;
 }
 
 .posts-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;  
+  grid-template-columns: 1fr 1fr;
   grid-auto-rows: 1fr;
   gap: 20px;
   flex: 1;
 }
 
 .post {
-  background: #ddd;
-  padding: 20px;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 6px;
+  padding: 24px;
+  font-weight: 700;
+  font-size: 1.05rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.post:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
   cursor: pointer;
 }
-/* makes the posts pop up a bit when hovered */
 
-/* Modal background */
+/* Modal */
 .modal {
   display: none;
   position: fixed;
+  inset: 0;
   z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
+  padding: 16px;
 }
 
-/* Modal box */
+.modal.show {
+  display: flex;
+}
+
 .modal-content {
-  background: #fff;
-  color: #333;
-  border-radius: 12px;
-  padding: 20px;
   width: 90%;
-  max-width: 500px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s ease;
+  max-width: 520px;
+  padding: 22px;
+  position: relative;
 }
 
-/* Title with purple theme */
 .modal-content h2 {
-  margin-top: 0;
-  color: rgb(57, 10, 86);
-  border-bottom: 2px solid rgb(57, 10, 86);
+  margin: 0 0 12px;
+  color: #3a0ca3;
+  border-bottom: 2px solid #3a0ca3;
   padding-bottom: 10px;
 }
 
-/* Close button */
 .close {
-  float: right;
+  position: absolute;
+  right: 12px;
+  top: 8px;
   font-size: 28px;
-  font-weight: bold;
-  color: #999;
+  border: 0;
+  background: transparent;
+  color: #777;
   cursor: pointer;
 }
+
 .close:hover {
-  color: rgb(57, 10, 86);
+  color: #3a0ca3;
 }
 
-/* Report details styling */
 #modalBody p {
   margin: 8px 0;
-  font-size: 1rem;
 }
 
-/* Uploaded photo */
 #modalBody img {
   width: 100%;
   max-height: 250px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-top: 10px;
 }
 
-/* Fade in effect */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-
+/* Responsive */
 @media (max-width: 900px) {
   .content-section {
     flex-direction: column;
   }
 
   .bg-photo {
-    height: 200px; /* show banner-like image instead */
+    height: 200px;
   }
 
   .main-content {
-    padding: 1rem;
+    margin: 16px;
+    padding: 18px;
   }
-}
 
-/* ---------- Report Modal ---------- */
-.modal {
-  display: none; 
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-}
-.modal.show { display: flex; }
-
-.modal-content {
-  background: #fff;
-  color: #333;
-  border-radius: 12px;
-  padding: 20px 22px 24px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s ease;
-  position: relative;
-}
-
-.modal-content h2 {
-  margin: 0 0 12px 0;
-  color: rgb(57, 10, 86);
-  font-size: 1.6rem;
-  border-bottom: 2px solid rgb(57, 10, 86);
-  padding-bottom: 10px;
-}
-
-/* Close button */
-.close {
-  position: absolute;
-  right: 12px;
-  top: 10px;
-  font-size: 28px;
-  font-weight: bold;
-  line-height: 1;
-  border: none;
-  background: transparent;
-  color: #999;
-  cursor: pointer;
-}
-.close:hover { color: rgb(57, 10, 86); }
-
-/* Report details */
-#modalBody p { margin: 8px
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
 }

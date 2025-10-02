@@ -1,258 +1,178 @@
-// ---------- VARIABLES ----------
-let currentPage = 0; // Current page index
-const pages = document.querySelectorAll('.page'); // select all sections/pages
+// ==================== VARIABLES ====================
+// Track the current visible page which is 0 - the first page
+let currentPage = 0;
 
-let sharedReport = false; // flag to track user shares contact details
-let selectedIssue = ''; // selected issue type
+// Select all page sections in the app
+const pages = document.querySelectorAll('.page');
 
-// Map related
-let map = null; // leaflet map object
-let marker = null; // marker object on the map
-let mapInitialized = false; // tracks if the map has been initialized
-const LOCATION_PAGE_INDEX = 3; // page-order: 0=home,1=issue-type,2=details,3=location,4=contact,5=confirmation
+// Flags for user choice
+let sharedReport = false, selectedIssue = '';//whether user shares contact details, stores the selected issue type
 
-// ----------PAGE NAVIGATION FUNCTIONS ----------
-function showPage(index) { //function to show a specific page by index
-  pages.forEach((page, i) => {
-    if (i === index) page.classList.add('active');
-    else page.classList.remove('active');
-  });
+// Map related variables
+let map, marker, mapInitialized = false;
 
-  // Initialize or refresh map when location page is shown
-  if (index === LOCATION_PAGE_INDEX) {
-    if (!mapInitialized) {
-      setTimeout(() => {
-        initMap();
-        mapInitialized = true;
-      }, 60);
-    } else {
-      setTimeout(() => {
-        if (map && typeof map.invalidateSize === 'function') {
-          map.invalidateSize();
-        }
-      }, 100);
-    }
-  }
+// Index of the page containing the map/location
+const LOCATION_PAaGE_INDEX = 3;
+
+
+// ==================== PAGE NAVIGATION ====================
+// Function to display a specific page by index
+function showPage(index) {
+  // Toogle the active class on all pages
+  pages.forEach((p, i) => p.classList.toggle('active', i === index));
+  
+  //Only initialize map if we're on the location page
+  if (index !== LOCATION_PAaGE_INDEX) return;
+
+  setTimeout(() => {
+    if (!mapInitialized) { initMap(); mapInitialized = true; }//mark map as intialized
+    else map?.invalidateSize();//fix map display after container resize
+  }, 100);//delay by 100ms
 }
 
-function nextPage() {
-  if (currentPage < pages.length - 1) {
-    currentPage++;
-    showPage(currentPage);
-  }
-}
+// Move to next page if not last
+function nextPage() { if (currentPage < pages.length - 1) showPage(++currentPage); }
 
-function prevPage() {
-  if (currentPage > 0) {
-    currentPage--;
-    showPage(currentPage);
-  }
-}
+// Move to previous page if not first
+function prevPage() { if (currentPage > 0) showPage(--currentPage); }
 
-// Initialize page display
+// Show the first page on load
 showPage(currentPage);
 
-// ---------- SELECT ISSUE TYPE PAGE ----------
-function selectIssue(issue) {
-  selectedIssue = issue;
-  nextPage();
-}
 
-// ---------- ADD LOCATION PAGE ----------
+// ==================== ISSUE TYPE ====================
+// Set selected issue and move to next page
+function selectIssue(issue) { selectedIssue = issue; nextPage(); }
+
+
+// ==================== MAP ====================
+// Initialize the Leaflet map
 function initMap() {
-  if (typeof L === 'undefined') {
-    console.error('Leaflet library not loaded. Make sure <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> is included.');
-    return;
-  }
+  if (typeof L === 'undefined') return console.error('Leaflet not loaded');
 
-  if (map) {
-    map.invalidateSize();
-    return;
-  }
+  // Default map center (Mission Ready location - coordinates)
+  map = L.map('map').setView([-36.9263, 174.7830], 13);
 
-  map = L.map('map').setView([-41.2865, 174.7762], 13);
-
+  //add OpenStreetMap tiles
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
+    maxZoom: 19, attribution: '© OpenStreetMap'
   }).addTo(map);
 
-  marker = L.marker([-41.2865, 174.7762]).addTo(map)
-    .bindPopup('Default Location')
-    .openPopup();
+  // Add default marker
+  marker = L.marker([-36.9263, 174.7830]).addTo(map).bindPopup('Default Location').openPopup();
 
-  map.on('click', function (e) {
-    const lat = e.latlng.lat;
-    const lng = e.latlng.lng;
-
-    if (marker) {
-      marker.setLatLng([lat, lng]).bindPopup(`Selected: ${lat.toFixed(5)}, ${lng.toFixed(5)}`).openPopup();
-    } else {
-      marker = L.marker([lat, lng]).addTo(map).bindPopup(`Selected: ${lat.toFixed(5)}, ${lng.toFixed(5)}`).openPopup();
-    }
-
-    const addrInput = document.getElementById('address-input');
-    if (addrInput) addrInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-  });
+  // Update marker when user clicks on the map
+  map.on('click', e => updateMarker(e.latlng.lat, e.latlng.lng, `Selected`));
 }
 
-async function findAddress() {
-  const addrEl = document.getElementById('address-input');
-  const errEl  = document.getElementById('address-error');
+//update or create a marker at given coordinates
+function updateMarker(lat, lng, label) {
+  marker = marker || L.marker([lat, lng]).addTo(map);
+  marker.setLatLng([lat, lng]).bindPopup(`${label}: ${lat.toFixed(5)}, ${lng.toFixed(5)}`).openPopup();
+  const addr = document.getElementById('address-input');
+  if (addr) addr.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;//update input with coordinates
+}
 
-  // ✅ Clear old error message every time Find Address is clicked
-  if (errEl) errEl.textContent = '';
+//search for an addresss/coordinates and move map to it
+async function findAddress() {//function to find address or coordinates
+  const input = document.getElementById('address-input')?.value.trim();//get user input from field
+  if (!input) return alert('Enter an address or coordinates.');//stop if input is empty
 
-  const address = (addrEl || { value: '' }).value.trim();
-  if (!address) {
-    if (errEl) errEl.textContent = 'Please enter an address or coordinates.';
-    return;
-  }
+  // Check if input is coordinates
+  const coords = input.match(/^\s*([+-]?\d+(\.\d+)?),\s*([+-]?\d+(\.\d+)?)\s*$/);
+  if (coords) return moveTo(+coords[1], +coords[3], 'Coordinates');
 
-  const coordMatch = address.match(/^\s*([+-]?\d+(\.\d+)?)\s*,\s*([+-]?\d+(\.\d+)?)\s*$/);
-  if (coordMatch) {
-    const lat = parseFloat(coordMatch[1]);
-    const lon = parseFloat(coordMatch[3]);
-    if (!mapInitialized) {
-      showPage(LOCATION_PAGE_INDEX);
-    }
-
-    if (map) {
-      map.setView([lat, lon], 16);
-      if (marker) marker.setLatLng([lat, lon]).bindPopup(`Coordinates: ${lat}, ${lon}`).openPopup();
-      else marker = L.marker([lat, lon]).addTo(map).bindPopup(`Coordinates: ${lat}, ${lon}`).openPopup();
-    }
-    return;
-  }
-
+//otherwise search address using OpenStreetMap nominatim
   try {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
-    const res = await fetch(url, {
-      headers: { 'Accept': 'application/json' }
-    });
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(input)}`);
     const data = await res.json();
-
-    if (!data || data.length === 0) {
-      if (errEl) errEl.textContent = 'Address not found. Try a different query.';
-      return;
-    }
-
-    const lat = parseFloat(data[0].lat);
-    const lon = parseFloat(data[0].lon);
-
-    if (!mapInitialized) {
-      showPage(LOCATION_PAGE_INDEX);
-    }
-
-    if (map) {
-      map.setView([lat, lon], 16);
-      const displayName = data[0].display_name || address;
-      if (marker) marker.setLatLng([lat, lon]).bindPopup(displayName).openPopup();
-      else marker = L.marker([lat, lon]).addTo(map).bindPopup(displayName).openPopup();
-    }
+    if (!data.length) return alert('Address not found.');
+    moveTo(+data[0].lat, +data[0].lon, data[0].display_name || input);
   } catch (err) {
     console.error('Geocoding error', err);
-    if (errEl) errEl.textContent = 'Error finding address. Please try again.';
+    alert('Error finding address.');
   }
 }
 
-// ---------- SAVE REPORT TO LOCALSTORAGE ----------
-function saveReportToLocalStorage(reporter, reference) {
-  const type        = selectedIssue || "Unknown";
-  const description = (document.getElementById('issue-description')?.value || "").trim();
-  const location    = (document.getElementById('address-input')?.value || "").trim();
-  const date        = new Date().toLocaleString();
-
-  const fileEl = document.getElementById('issue-photo');
-  const file   = fileEl && fileEl.files && fileEl.files[0];
-
-  const doSave = (photoData) => {
-    const report = { type, description, reporter, reference, date, location, photo: photoData || null };
-    localStorage.setItem('fixitReport', JSON.stringify(report));
-  };
-
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = e => doSave(e.target.result);
-    reader.readAsDataURL(file);
-  } else {
-    doSave(null);
-  }
+//Move map and marker to a given lat/long with label
+function moveTo(lat, lon, label) {
+  if (!mapInitialized) showPage(LOCATION_PAGE_INDEX);//ensure map is ready
+  map?.setView([lat, lon], 16);//center map and zoom in
+  updateMarker(lat, lon, label);//update marker with new position and label
 }
 
-// ---------- CONTACT DETAILS PAGE ----------
+
+// ==================== CONTACT DETAILS ====================
+//User chooses to report anonymously
 function reportAnonymous() {
   sharedReport = false;
   showPage(5);
-
-  const anonMsg = document.getElementById('anonymous-message');
-  if (anonMsg) anonMsg.style.display = 'block';
-
-  const refCont = document.getElementById('reference-container');
-  if (refCont) refCont.style.display = 'none';
-
-  // Save report as anonymous
-  const reference = generateReference();
-  saveReportToLocalStorage("Anonymous", reference);
+  document.getElementById('anonymous-message')?.style.setProperty('display', 'block');
+  document.getElementById('reference-container')?.style.setProperty('display', 'none');
 }
 
+//User chooses to share their contact details
 function shareDetails() {
   sharedReport = true;
-  const form = document.getElementById('contact-form');
-  if (form) form.style.display = 'block';
+  document.getElementById('contact-form')?.style.setProperty('display', 'block');
 }
 
+//validate and submit report
 function submitReport() {
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-
-  document.getElementById('name-error').innerText = '';
-  document.getElementById('email-error').innerText = '';
-  nameInput.classList.remove('input-error');
-  emailInput.classList.remove('input-error');
-
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
   let valid = true;
 
-  if (!name) {
-    document.getElementById('name-error').innerText = 'Name is required.';
-    nameInput.classList.add('input-error');
-    valid = false;
-  }
-  if (!email) {
-    document.getElementById('email-error').innerText = 'Email is required.';
-    emailInput.classList.add('input-error');
-    valid = false;
-  }
+//Validate required fields
+  ['name', 'email'].forEach(id => {//loop through fields
+    const input = document.getElementById(id);//get input field
+    const err = document.getElementById(`${id}-error`);//get error span
+    input.classList.remove('input-error');//clear error styles
+    err.innerText = '';//clear previous error message
 
-  if (!valid) return;
+      if (!input.value.trim()) {//if field is empty
+        err.innerText = `${id[0].toUpperCase() + id.slice(1)} is required.`;//show error message
+        input.classList.add('input-error');//add error styling
+        valid = false;//mark as invalid
+    }
+  });
 
+  if (!valid) return;//stop if invalid inputs
+
+//Move to confirmation page
   showPage(5);
-
-  let reference;
-  if (sharedReport) {
-    reference = generateReference();
-    const el = document.getElementById('reference-number');
-    if (el) el.innerText = reference;
-    const refCont = document.getElementById('reference-container');
-    if (refCont) refCont.style.display = 'block';
-  } else {
-    reference = generateReference();
-    const refCont = document.getElementById('reference-container');
-    if (refCont) refCont.style.display = 'none';
-  }
-
-  // Save report with name
-  saveReportToLocalStorage(name, reference);
+  const refCont = document.getElementById('reference-container');//reference container element
+  if (sharedReport) {//if user share details
+    document.getElementById('reference-number').innerText = generateReference();//generate and display refernce number
+    refCont.style.display = 'block';//show reference container
+  } else refCont.style.display = 'none';//hide reference container if anonymous
 }
 
-// ---------- GENERATE UNIQUE REFERENCE NUMBER ----------
-function generateReference() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let ref = '';
-  for (let i = 0; i < 8; i++) {
-    ref += chars.charAt(Math.floor(Math.random() * chars.length));
+// ==================== IMAGE INSERTING ====================
+// Preview image when user selects file
+document.getElementById('issue-photo').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const dropText = document.getElementById('drop-text');
+  const preview = document.getElementById('preview');
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block'; // show image
+      dropText.style.display = 'none'; // hide text
+    }
+    reader.readAsDataURL(file);
+  } else {
+    preview.style.display = 'none'; // hide image if no file
+    dropText.style.display = 'block'; // show text back
   }
-  return ref;
+});
+
+
+// ==================== GENERATE REFERENCE ====================
+//Create a random 8character reference number
+function generateReference() {
+  return Array.from({ length: 8 }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'//create array of 8 characters and allowed characters
+    .charAt(Math.floor(Math.random() * 36))).join('');//pick random character and join into a single string
 }
