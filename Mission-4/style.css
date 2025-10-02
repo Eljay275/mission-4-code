@@ -1,47 +1,48 @@
-/* Reset */
+/* Reset everything so browsers stop fighting me */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ===== Animated gradient background + base typography ===== */
+/* ===== Body: moving rainbow vibes + smooth fade-in ===== */
 body {
-  background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
-  background-size: 300% 300%;
-  animation: gradientMove 12s ease infinite;
-  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585); /* fancy gradient */
+  background-size: 300% 300%; /* makes it big so it can move */
+  animation: gradientMove 12s ease infinite; /* slow trippy colour shift */
+  font-family: 'Poppins', sans-serif; /* clean & modern font */
   color: #333;
   line-height: 1.5;
-  opacity: 0;                  /* smooth page fade-in */
-  animation-name: gradientMove, pageFade;
-  animation-duration: 12s, .7s;
+  opacity: 0; /* start invisible for fade-in */
+  animation-name: gradientMove, pageFade; /* two animations at once */
+  animation-duration: 12s, .7s; /* gradient is long, fade is quick */
   animation-timing-function: ease, ease;
-  animation-iteration-count: infinite, 1;
+  animation-iteration-count: infinite, 1; /* gradient never stops, fade runs once */
   animation-fill-mode: both;
 }
 
-/* Gradient animation */
+/* Keyframes for background swoosh */
 @keyframes gradientMove {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* Fade in so it doesn’t jump-scare you */
 @keyframes pageFade {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-/* Navbar */
+/* ===== Navbar: semi-transparent glass look ===== */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(20, 0, 35, 0.65);
+  background: rgba(20, 0, 35, 0.65); /* glassy purple */
   color: white;
   padding: 14px 20px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); /* frosted glass vibe */
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -50,8 +51,9 @@ body {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  overflow: hidden;
+  overflow: hidden; /* keeps logo round */
 }
+
 .logo img {
   width: 100%;
   height: 100%;
@@ -66,6 +68,7 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Search box: see-through but readable */
 .search input {
   padding: 8px 10px;
   font-size: 15px;
@@ -90,38 +93,43 @@ body {
   color: #fff;
 }
 
+/* Buttons in navbar don’t need extra spacing */
 .navbar > .signup-btn,
 .navbar > .login-btn {
-  margin: 0 !important;         
+  margin: 0 !important;
   display: inline-flex;
   align-items: center;
 }
 
 .navbar > .login-btn {
-  margin-left: 14px !important; 
+  margin-left: 14px !important;
 }
 
 .navbar > .menu {
   margin-left: 14px;
 }
 
-/* Content */
+/* ===== Content layout ===== */
 .content-section {
   display: flex;
   align-items: stretch;
-  min-height: 100vh;
+  min-height: 100vh; /* always full page */
 }
+
+/* Big background pics on sides */
 .bg-photo {
   flex: 1;
   display: flex;
 }
+
 .bg-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.8) contrast(1.05) saturate(1.1);
+  filter: brightness(0.8) contrast(1.05) saturate(1.1); /* glow up */
 }
 
+/* Cards + main content all have that glassy panel look */
 .main-content,
 .welcome-box,
 .post,
@@ -134,11 +142,13 @@ body {
   transition: transform 0.3s ease;
 }
 
+/* Hover lift effect for cards */
 .main-content:hover,
 .post:hover {
   transform: translateY(-6px);
 }
 
+/* Main text container */
 .main-content {
   flex: 2;
   max-width: 1200px;
@@ -156,6 +166,7 @@ body {
   margin-bottom: 16px;
 }
 
+/* ===== Buttons: shiny pill buttons ===== */
 .primary-btn,
 .signup-btn,
 .login-btn {
@@ -168,7 +179,7 @@ body {
   font-weight: 700;
   font-size: 16px;
   display: inline-block;
-  border-radius: 50px;
+  border-radius: 50px; /* pill shape */
   text-decoration: none;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
@@ -178,10 +189,10 @@ body {
 .signup-btn:hover,
 .login-btn:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #7209b7, #f72585);
+  background: linear-gradient(135deg, #7209b7, #f72585); /* colour swap */
 }
 
-/* Icon grid */
+/* ===== Icon grid ===== */
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -228,7 +239,7 @@ body {
 
 .icon:hover i,
 .icon:hover img {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.15) rotate(5deg); /* lil wiggle */
 }
 
 .icon-label {
@@ -238,13 +249,13 @@ body {
   color: #3a0ca3;
 }
 
-/* Modal */
+/* ===== Modal (pop-up form) ===== */
 .modal {
-  display: none;
+  display: none; /* hidden until needed */
   position: fixed;
-  inset: 0;
+  inset: 0; /* full screen */
   z-index: 9999;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6); /* dark overlay */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -299,9 +310,9 @@ body {
   font-weight: 600;
 }
 
-/* Validation states */
+/* ===== Validation states (error + success bling) ===== */
 .modal-content input.error {
-  border: 2px solid #d32f2f;
+  border: 2px solid #d32f2f; /* angry red */
 }
 
 .error-message {
@@ -312,21 +323,23 @@ body {
 }
 
 .modal-content input.success {
-  border: 2px solid #388e3c;
+  border: 2px solid #388e3c; /* nice green */
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" viewBox="0 0 16 16"><path d="M13.485 1.929a.75.75 0 0 1 0 1.06l-7.25 7.25-3.25-3.25a.75.75 0 1 1 1.06-1.06l2.19 2.19 6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 18px;
 }
 
-/* Responsive */
+/* ===== Responsive tweaks (phone friendly) ===== */
 @media (max-width: 900px) {
   .content-section {
-    flex-direction: column;
+    flex-direction: column; /* stack stuff vertically */
   }
+
   .bg-photo {
-    height: 200px;
+    height: 200px; /* shorter banner images */
   }
+
   .main-content {
     margin: 16px;
     padding: 18px;

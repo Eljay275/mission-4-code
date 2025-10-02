@@ -3,21 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>FixIt</title>
-
-    <!-- Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-    <!-- CSS/JS -->
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
-    <!-- Header -->
+
     <body>
     <header>
+      <!-- NAVBAR -->
       <div class="navbar">
         <div class="logo"><img src="images/FixIt logo.PNG" alt="FixIt-Logo" /></div>
         <div class="site-title">FixIt</div>
@@ -90,17 +86,19 @@
           <p><button type="button" class="link back-default">Back</button></p>
         </div>
 
+
         <!-- LOG IN -->
         <div id="view-login" class="view hidden">
           <h2>Log in</h2>
           <form id="loginForm" novalidate>
-            <input type="email" placeholder="Email" name="email" required />
-            <input type="password" placeholder="Password" name="password" required />
-            <label><input type="checkbox" /> Remember me</label>
+              <input type="email" placeholder="Email" name="email" required />
+              <!-- add minlength -->
+              <input type="password" placeholder="Password" name="password" required minlength="6" />
+              <label><input type="checkbox" /> Remember me</label>
             <button type="submit" class="login-btn">Log in</button>
           </form>
-          <p><a href="#">Forgot password?</a></p>
-          <p><button type="button" class="link back-default">Back</button></p>
+         <p><a href="#">Forgot password?</a></p>
+         <p><button type="button" class="link back-default">Back</button></p>
         </div>
       </div>
     </div>
