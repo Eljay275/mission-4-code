@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Welcome
   const name = localStorage.getItem("fixitUser") || "User";
   const welcome = document.getElementById("welcomeMessage");
   if (welcome) welcome.textContent = `Welcome back, ${name}!`;
 
-  // Report modal
   const reportBox = document.getElementById("reportBox");
   const report = safeParse(localStorage.getItem("fixitReport"));
   const modal = document.getElementById("reportModal");

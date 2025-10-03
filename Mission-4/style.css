@@ -8,16 +8,16 @@
 /* ===== Body: moving rainbow vibes + smooth fade-in ===== */
 body {
   background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585); /* fancy gradient */
-  background-size: 300% 300%; /* makes it big so it can move */
+  background-size: 300% 300%;
   animation: gradientMove 12s ease infinite; /* slow trippy colour shift */
-  font-family: 'Poppins', sans-serif; /* clean & modern font */
+  font-family: 'Poppins', sans-serif;
   color: #333;
   line-height: 1.5;
-  opacity: 0; /* start invisible for fade-in */
-  animation-name: gradientMove, pageFade; /* two animations at once */
-  animation-duration: 12s, .7s; /* gradient is long, fade is quick */
+  opacity: 0;
+  animation-name: gradientMove, pageFade;
+  animation-duration: 12s, .7s;
   animation-timing-function: ease, ease;
-  animation-iteration-count: infinite, 1; /* gradient never stops, fade runs once */
+  animation-iteration-count: infinite, 1; /* gradient goes forever and ever and ever */
   animation-fill-mode: both;
 }
 
@@ -166,7 +166,6 @@ body {
   margin-bottom: 16px;
 }
 
-/* ===== Buttons: shiny pill buttons ===== */
 .primary-btn,
 .signup-btn,
 .login-btn {
@@ -179,7 +178,7 @@ body {
   font-weight: 700;
   font-size: 16px;
   display: inline-block;
-  border-radius: 50px; /* pill shape */
+  border-radius: 50px; 
   text-decoration: none;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;

@@ -150,7 +150,7 @@ button:hover {
   height: auto;
   border-radius: 15px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 6px black;
+  /* box-shadow: 0 4px 6px black; */
 }
 
 #page-home .home-card h3 {
@@ -239,6 +239,7 @@ button:hover {
   border: 2px dashed #fff;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;   /* added by lauola */
   justify-content: center;
   align-items: center;
   color: #ffffff;
@@ -265,7 +266,6 @@ button:hover {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
 }
 
 
@@ -365,3 +365,58 @@ button:hover {
   background-size: 20px 20px;
 }
 
+/* override by lauola */
+#page-issue-details #drop-zone {
+  height: 250px; /* fixed container size */
+  max-height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* no overflow outside border */
+}
+
+#page-issue-details #preview {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: none;
+}
+
+#page-home,
+#page-issue-details {
+  padding-bottom: 56px; /* <- the visible gap */
+}
+
+#page-home .app-header,
+#page-issue-details .app-header {
+  margin: 16px 0 12px;
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+#page-home .home-card {
+  width: min(92vw, 580px);
+  padding: 22px 30px;
+  margin: 0 auto 24px; /* space below the card */
+  border-radius: 16px;
+}
+
+#page-home .home-card img {
+  max-height: 300px;
+  width: 100%;
+  object-fit: contain;
+}
+
+#page-issue-details .issue-details-card {
+  width: min(94vw, 900px);
+  padding: 18px 20px;
+  margin: 0 auto 24px; /* space below the card */
+  border-radius: 16px;
+}
+
+#page-issue-details textarea {
+  height: 120px;
+}
+
+#page-issue-details .navigation {
+  margin-top: 12px;
+}
